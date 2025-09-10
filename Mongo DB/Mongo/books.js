@@ -38,13 +38,16 @@ const bookSchema=new mongoose.Schema({
 //create model
 const Book=mongoose.model("Book",bookSchema)
 
-const Book1=new Book({
-    title:"Mathematics XII",
-    author:"Rd sharma",
-    price:150,
-    discount:50,
-    category:"fictional",
-    genre:["comic","adventure","fight"]
-})
+//use of validators
+Book.findByIdAndUpdate("68c09aff0a368811c23efa34",{price:500},{runValidators:true},{new:true}).then(data=>console.log(data))
+.catch(err=>console.log(err))
+// const Book1=new Book({
+//     title:"Mathematics XII",
+//     author:"Rd sharma",
+//     price:150,
+//     discount:50,
+//     category:"fictional",
+//     genre:["comic","adventure","fight"]
+// })
 
-Book1.save().then(data=>console.log(data)).catch(err=>console.log(err))
+// Book1.save().then(data=>console.log(data)).catch(err=>console.log(err))
