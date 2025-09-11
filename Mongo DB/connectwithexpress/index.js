@@ -3,12 +3,15 @@ const app=express()
 const mongoose=require("mongoose")
 const path=require("path")
 const chat=require("./models/chat.js")
+const Chat = require("./models/chat.js")
+const methodOverride=require("method-override")
 
 app.set("views",path.join(__dirname,"views"))
 app.set("views engine","ejs")
 
 app.use(express.static(path.join(__dirname,"public")))
 app.use(express.urlencoded({extended:true}))
+app.use(methodOverride("_method"))
 
 main()
 .then(()=>console.log("database is connected"))
@@ -41,6 +44,26 @@ app.post("/chats",(req,res)=>{
     })
    newChat.save().then(data=>console.log('new chat saved')).catch(err=>console.log(err))
    res.redirect("/chats");
+})
+
+//edit route
+app.get("/chats/:id/edit",async(req,res)=>{
+    let {id}=req.params;
+    let chats=await Chat.findById(id)
+    res.render("edit.ejs",{chats});
+})
+//update route
+app.put("/chats/:id",async(req,res)=>{
+    let {msg:newMsg}=req.body
+    let {id}=req.params
+    await Chat.findByIdAndUpdate(id,{msg:newMsg},{runvalidator:true},{new:true})
+    res.redirect("/chats")
+})
+//delte route
+app.delete("/chats/:id",async(req,res)=>{
+    let {id}=req.params;
+   await Chat.findByIdAndDelete(id);
+    res.redirect("/chats")
 })
 
 app.listen(8000,()=>console.log("server is up baby....!"))
