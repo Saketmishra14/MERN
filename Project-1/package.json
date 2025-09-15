@@ -1,7 +1,6 @@
 {
   "name": "project-1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js"
@@ -11,7 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.10",
+    "ejs-mate": "^4.0.0",
     "express": "^5.1.0",
+    "method-override": "^3.0.0",
     "mongoose": "^8.18.1"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
