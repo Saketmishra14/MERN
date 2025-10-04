@@ -4,7 +4,6 @@ const Listing=require("./Models/listing.js")
 const path=require("path")
 const methodOverride=require("method-override")
 const ejsMate=require("ejs-mate")
-
 const mongoose=require("mongoose")
 
 app.set("view engine","ejs")
